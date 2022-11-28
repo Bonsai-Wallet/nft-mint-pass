@@ -1,0 +1,7 @@
+{
+  "name": "nft-pass",
+  "version": "1.0.0",
+  "description": "mint pass for Bonsai Finance",
+  "main": "index.js",
+  "license": "MIT"
+}
