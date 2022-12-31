@@ -7,20 +7,46 @@ import "@openzeppelin/contracts/token/ERC721/ERC721Full.sol";
 import "@openzeppelin/contracts/drafts/Counters.sol";
 
 contract MintPassToken is ERC721 {
-    bool isSaleActive = false;
+    bool saleIsActive = false;
+    uint256 public totalMintPass = 5000;
+    uint256 public availableMintPass = 5000;
+    uint256 public tokenPrice = 70000000000000000;
+
+    mapping(address => uint256[]) public holderTokenIDs;
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
     constructor() ERC721("BonsaiMintPass", "BMP") {}
 
-    function mintItem(address to, string memory uri) public returns (uint256) {
-        _tokenIds.increment();
+    function mintItem(address to, string memory uri) public payable {
+        require(availableTickets > 0, "NFT Pass are sold out");
+        require(saleIsActive, "Tickets are not on sale");
 
         uint256 newItemId = _tokenIds.current();
+
         _mint(to, newItemId);
         _setTokenURI(newItemId, tokenURI);
 
+        _tokenIds.increment();
+        availableMintPass = availableMintPass - 1;
+
         return newItemId;
+    }
+
+    function aavailableMintPassCount() public view returns (uint256) {
+        return availableMintPass;
+    }
+
+    function totalMintPassCount() public view returns (uint256) {
+        return totalMintPass;
+    }
+
+    function openSale() public onlyOwner {
+        saleIsActive = true;
+    }
+
+    function closeSale() public onlyOwner {
+        saleIsActive = false;
     }
 }
