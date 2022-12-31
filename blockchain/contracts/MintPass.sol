@@ -34,12 +34,12 @@ contract MintPassToken is ERC721 {
         return newItemId;
     }
 
-    function availableTicketsCount() public view returns (uint256) {
-        return availableTickets;
+    function aavailableMintPassCount() public view returns (uint256) {
+        return availableMintPass;
     }
 
-    function totalTicketsCount() public view returns (uint256) {
-        return totalTickets;
+    function totalMintPassCount() public view returns (uint256) {
+        return totalMintPass;
     }
 
     function openSale() public onlyOwner {
