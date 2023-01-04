@@ -1,6 +1,22 @@
-import { time, loadFixture } from '@nomicfoundation/hardhat-network-helpers';
-import { anyValue } from '@nomicfoundation/hardhat-chai-matchers/withArgs';
-import { expect } from 'chai';
-import { ethers } from 'hardhat';
+const { ethers } = require('hardhat');
+const { expect } = require('chai');
 
-describe('Mint Token', function () {});
+describe('Bonsai Mint Pass contract', function () {
+  let MintPass: { deployed: () => any; totalMintPass: () => any };
+
+  before((done) => {
+    setTimeout(done, 2000);
+  });
+
+  beforeEach(async () => {
+    const MintPassConttract = await ethers.getContractFactory('MintPass');
+    MintPass = await MintPassConttract.deploy();
+  });
+
+  describe('TotalSupply', function () {
+    it('Total Supply should equal to 5000 units', async function () {
+      await MintPass.deployed();
+      expect(await MintPass.totalMintPass()).to.equal('5000');
+    });
+  });
+});
