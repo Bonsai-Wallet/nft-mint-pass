@@ -1,7 +1,6 @@
 pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -26,6 +25,7 @@ contract MintPass is ERC721URIStorage, Ownable {
         returns (uint256)
     {
         require(availableMintPass > 0, "NFT Pass are sold out");
+        require(msg.value >= tokenPrice, "Not Enough ETH");
         require(saleIsActive, "Tickets are not on sale");
 
         uint256 newItemId = _tokenIds.current();
