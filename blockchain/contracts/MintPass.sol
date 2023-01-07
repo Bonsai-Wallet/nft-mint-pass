@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 // import "hardhat/console.sol";
 
 contract MintPass is ERC721URIStorage, Ownable {
-    bool public saleIsActive = true;
+    bool public saleIsActive = false;
     uint256 public totalMintPass = 5000;
     uint256 public availableMintPass = 5000;
     uint256 public tokenPrice = 0.07 ether;
