@@ -33,7 +33,7 @@ describe('Bonsai Mint Pass contract', function () {
   describe('Mint Contract', function () {
     const tokenURI = 'someTokenURI/1';
 
-    it('Should return excpeted values', async function () {
+    it.only('Should return excpeted values', async function () {
       expect(await MintPass.totalMintPass()).to.equal('5000');
       expect(await MintPass.availableMintPass()).to.equal('5000');
       expect(await MintPass.tokenPrice()).to.equal(70000000000000000n);
